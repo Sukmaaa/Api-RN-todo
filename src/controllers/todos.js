@@ -94,9 +94,18 @@ exports.deleteTodo = async (req, res) => {
                 message: 'Todo not found',
             });
         };
+
+        const todosUpdated = await todo.findAll({
+            order: [["createdAt", "ASC"]],
+          });
+
         res.status(200).json({
             status: 200,
             message: 'successfully deleted',
+            data: {
+                deleteTodo,
+                todosUpdated
+            }
         });
     } catch (error) {
         console.log(error);
@@ -120,10 +129,17 @@ exports.updateTodo = async (req, res) => {
             },
         });
 
+        const todosUpdated = await todo.findAll({
+            order: [["createdAt", "ASC"]],
+          });
+
         res.status(200).json({
             status: 200,
             message: "Succesfully Update",
-            data: updateTodo,
+            data: {
+                updateTodo,
+                todosUpdated
+            }
         })
     } catch (error) {
         console.log(error);
