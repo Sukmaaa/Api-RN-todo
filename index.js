@@ -8,7 +8,7 @@ const router = require("./src/router/todo");
 app.use(express.json());
 app.use(cors());
 
-const {todo} = require("./models");
+const db = require("./models");
 
 //routes
 app.use("/api/v1", router);
