@@ -1,8 +1,8 @@
-const {todo} = require("../../models");
+const {Todo} = require("../../models");
 
 exports.getTodos = async (req, res) => {
   try {
-    const todos = await todo.findAll({ order: [["createdAt", "ASC"]] });
+    const todos = await Todo.findAll({ order: [["createdAt", "ASC"]] });
 
     res.status(200).json({
       status: 200,
@@ -21,7 +21,7 @@ exports.getTodo = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const todo = await todo.findOne({
+    const todo = await Todo.findOne({
       where: {
         id,
       },
@@ -51,12 +51,12 @@ exports.addTodo = async (req, res) => {
   try {
     const { title, status } = req.body;
 
-    const todo = await todo.create({
+    const todo = await Todo.create({
       title,
       status,
     });
 
-    const dataTodos = await todo.findAll({
+    const dataTodos = await Todo.findAll({
       order: [["createdAt", "ASC"]],
     });
 
@@ -79,13 +79,13 @@ exports.deleteTodo = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deletedTodo = await todo.destroy({
+    const deletedTodo = await Todo.destroy({
       where: {
         id,
       },
     });
 
-      const dataTodos = await todo.findAll({
+      const dataTodos = await Todo.findAll({
         order: [["createdAt", "ASC"]],
       });
 
@@ -108,7 +108,7 @@ exports.updateTodo = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const updateTodo = await todo.update({
+    const updateTodo = await Todo.update({
       where: {
         id,
       },
@@ -116,7 +116,7 @@ exports.updateTodo = async (req, res) => {
 
 
       // Mengambil semua data todo setelah dilakukan peng-update-an
-      const dataTodos = await todo.findAll({
+      const dataTodos = await Todo.findAll({
         order: [["createdAt", "ASC"]],
       });
 
