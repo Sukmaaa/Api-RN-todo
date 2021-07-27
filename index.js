@@ -2,19 +2,16 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-
 const PORT = process.env.PORT || 9201;
-
-const todo = require("./src/routes/todo");
+const router = require("./src/router/todo");
 
 app.use(express.json());
 app.use(cors());
 
-//sequelize or database
-const db = require("./models");
+const {todo} = require("./models");
 
 //routes
-app.use("/api/v1", todo);
+app.use("/api/v1", router);
 app.use("/", (req, res) => {
   res.send("Deploy by Sukma Aspriliyawan");
 });
